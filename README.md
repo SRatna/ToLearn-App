@@ -1,0 +1,1 @@
+This project is a react based app that enables user to add new to-learn item.
