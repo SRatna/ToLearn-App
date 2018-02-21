@@ -3,11 +3,11 @@
  */
 
 export const registerUser = (email, password) => ({
-  type: 'REGISTER_LOGIN', email, password
+  type: 'REGISTER_USER', email, password
 });
 
 export const loginUser = (email, password) => ({
-  type: 'USER_LOGIN', email, password
+  type: 'LOGIN_USER', email, password
 });
 
 export const loginUserDone = (authData) => ({
