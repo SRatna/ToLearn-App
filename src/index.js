@@ -7,7 +7,9 @@ import { Provider } from 'react-redux';
 import reducer from './reducers';
 import createSagaMiddleware from 'redux-saga'
 import saga from './saga';
+import { initializeFirebase } from './api';
 
+initializeFirebase();
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
   reducer,
