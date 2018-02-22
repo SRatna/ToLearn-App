@@ -4,6 +4,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { registerUser } from '../../../actions';
+import Wrapper from '../components/Wrapper';
+import Card from '../components/Card';
+import Input from '../components/Input';
+import Button from '../components/Button';
 
 let Register = ({ onRegisterBtnClick }) => {
   let email, password;
@@ -14,11 +18,15 @@ let Register = ({ onRegisterBtnClick }) => {
     password = e.target.value;
   };
   return (
-    <div>
-      <input type="email" onChange={handleEmailChange}/>
-      <input type="password" onChange={handlePasswordChange}/>
-      <button onClick={() => onRegisterBtnClick(email, password)}>Register</button>
-    </div>
+    <Wrapper>
+      <Card>
+        <label>Email</label>
+        <Input type="email" onChange={handleEmailChange}/>
+        <label>Password</label>
+        <Input type="password" onChange={handlePasswordChange}/>
+        <Button onClick={() => onRegisterBtnClick(email, password)}>Register</Button>
+      </Card>
+    </Wrapper>
   )
 };
 
