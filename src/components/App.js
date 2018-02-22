@@ -1,11 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Switch, BrowserRouter as Router, Route } from 'react-router-dom';
+import Register from '../containers/User/Register';
 
-class App extends Component {
-  render() {
-    return (
-      <div>cool</div>
-    );
-  }
-}
+let App = () => {
+  return (
+    <Router>
+      <Switch>
+        <Route path="/register" component={Register} />
+      </Switch>
+    </Router>
+  );
+};
 
 export default App;

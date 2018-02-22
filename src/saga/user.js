@@ -2,6 +2,7 @@
  * Created by sushanta on 2/21/18.
  */
 import { call, put } from 'redux-saga/effects';
+import { registerUserApi } from '../api';
 
 export function* loginUser({ email, password }) {
   console.log(email, password);

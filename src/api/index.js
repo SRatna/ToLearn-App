@@ -14,14 +14,11 @@ export const registerUserApi = (email, password) => {
       // Handle Errors here.
       let errorCode = error.code;
       let errorMessage = error.message;
-      if (errorCode == 'auth/weak-password') {
+      if (errorCode === 'auth/weak-password') {
         alert('The password is too weak.');
       } else {
         alert(errorMessage);
       }
       console.log(error);
-    })
-    .then(user => {
-      console.log(user);
     });
 };
