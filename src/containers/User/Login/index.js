@@ -9,6 +9,7 @@ import Card from '../components/Card';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import { Link, Redirect } from 'react-router-dom';
+import ErrorBox from '../components/ErrorBox';
 
 let Login = ({ onLoginBtnClick, errorMessage, isAuthenticated }) => {
   if (isAuthenticated) {
@@ -23,18 +24,20 @@ let Login = ({ onLoginBtnClick, errorMessage, isAuthenticated }) => {
   };
   return (
     <Wrapper>
-      <Card>
-        <label>Email</label>
-        <Input type="email" onChange={handleEmailChange} defaultValue=" "/>
-        <label>Password</label>
-        <Input type="password" onChange={handlePasswordChange} defaultValue=" "/>
-        <Button onClick={() => onLoginBtnClick(email, password)}>Login</Button>
-        <p style={{fontSize: '15px'}}>
-          <Link to='/register'>Register Now</Link>{' '}
-          if you don't have an account.
-        </p>
-      </Card>
-      <p>{errorMessage}</p>
+      <div>
+        {errorMessage && <ErrorBox>{errorMessage}</ErrorBox>}
+        <Card>
+          <label>Email</label>
+          <Input type="email" onChange={handleEmailChange} defaultValue=" "/>
+          <label>Password</label>
+          <Input type="password" onChange={handlePasswordChange} defaultValue=" "/>
+          <Button onClick={() => onLoginBtnClick(email, password)}>Login</Button>
+          <p style={{fontSize: '15px'}}>
+            <Link to='/register'>Register Now</Link>{' '}
+            if you don't have an account.
+          </p>
+        </Card>
+      </div>
     </Wrapper>
   )
 };
