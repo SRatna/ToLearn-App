@@ -17,3 +17,7 @@ export const loginOrRegisterUserDone = (authData) => ({
 export const logoutUser = () => ({
   type: 'LOGOUT_USER'
 });
+
+export const saveToLearnText = (text) => ({
+  type: 'SAVE_TO_LEARN_TEXT', text
+});

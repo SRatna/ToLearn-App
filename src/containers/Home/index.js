@@ -3,14 +3,26 @@
  */
 import React from 'react';
 import NavBar from '../NavBar';
+import { saveToLearnText } from '../../actions';
+import { connect } from 'react-redux';
 
-let Home = () => {
+let Home = ({ onToLearnTextSaveBtnClick }) => {
+  let toLearnText;
+  let handleToLearnTextChange = (e) => {
+    toLearnText = e.target.value;
+  };
   return (
     <div>
       <NavBar/>
-      <div>this is home</div>
+      <div>
+        <input type="text" onChange={handleToLearnTextChange}/>
+        <button onClick={() => onToLearnTextSaveBtnClick(toLearnText)}>Submit</button>
+      </div>
     </div>
   );
 };
 
-export default Home;
+const mapDispatchToProps = {
+  onToLearnTextSaveBtnClick: saveToLearnText
+};
+export default connect(null, mapDispatchToProps)(Home);

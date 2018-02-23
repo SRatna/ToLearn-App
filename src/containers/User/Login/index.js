@@ -28,9 +28,9 @@ let Login = ({ onLoginBtnClick, errorMessage, isAuthenticated }) => {
         {errorMessage && <ErrorBox>{errorMessage}</ErrorBox>}
         <Card>
           <label>Email</label>
-          <Input type="email" onChange={handleEmailChange} defaultValue=" "/>
+          <Input type="email" onChange={handleEmailChange}/>
           <label>Password</label>
-          <Input type="password" onChange={handlePasswordChange} defaultValue=" "/>
+          <Input type="password" onChange={handlePasswordChange}/>
           <Button onClick={() => onLoginBtnClick(email, password)}>Login</Button>
           <p style={{fontSize: '15px'}}>
             <Link to='/register'>Register Now</Link>{' '}

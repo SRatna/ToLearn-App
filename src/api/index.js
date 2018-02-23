@@ -45,3 +45,9 @@ export const loginUserApi = (email, password) => {
 export const logOutUserApi = () => {
   firebase.auth().signOut();
 };
+
+export const saveToLearnTextApi = (text) => {
+  firebase.database().ref('toLearns/').push().set({
+    text: text
+  });
+};
