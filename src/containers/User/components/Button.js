@@ -12,6 +12,7 @@ const Button = styled.button`
   margin-top: 10px;
   transition: 0.8s;
   outline: none;
+  cursor: pointer;
   &:hover {
     background: palevioletred;
     color: white;

@@ -3,6 +3,8 @@
  */
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { logoutUser } from '../actions';
 
 const Nav = styled.nav`
   background: #db7093;
@@ -20,11 +22,11 @@ const LogOut = styled.span`
   float: right;
   cursor: pointer;
 `;
-let NavBar = () => {
+let NavBar = ({ onLogOutBtnClick }) => {
   return (
     <Nav>
       <Brand>To-Learn</Brand>
-      <LogOut>
+      <LogOut onClick={onLogOutBtnClick}>
         <svg x="0px" y="0px" viewBox="0 0 490.3 490.3" height="25" width="40">
           <path fill="white" d="M0,121.05v248.2c0,34.2,27.9,62.1,62.1,62.1h200.6c34.2,0,62.1-27.9,62.1-62.1v-40.2c0-6.8-5.5-12.3-12.3-12.3
 			s-12.3,5.5-12.3,12.3v40.2c0,20.7-16.9,37.6-37.6,37.6H62.1c-20.7,0-37.6-16.9-37.6-37.6v-248.2c0-20.7,16.9-37.6,37.6-37.6h200.6
@@ -38,5 +40,7 @@ let NavBar = () => {
     </Nav>
   )
 };
-
-export default NavBar;
+const mapDispatchToProps = {
+  onLogOutBtnClick: logoutUser
+};
+export default connect(null, mapDispatchToProps)(NavBar);

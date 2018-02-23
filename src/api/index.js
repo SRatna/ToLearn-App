@@ -41,3 +41,7 @@ export const loginUserApi = (email, password) => {
       }
     });
 };
+
+export const logOutUserApi = () => {
+  firebase.auth().signOut();
+};

@@ -10,18 +10,22 @@ let initialState = {
 const user = (state = initialState, action) => {
   switch (action.type) {
     case 'LOGIN_REGISTER_USER_DONE':
-      console.log(action);
       if (action.success) {
         sessionStorage.setItem('email', action.email);
-        sessionStorage.setItem('userId', action.userId);
+        sessionStorage.setItem('userId', action.id);
         return {
-          ...state, isAuthenticated: true, email: action.email, errorMessage: null, userId: action.userId
+          ...state, isAuthenticated: true, email: action.email, errorMessage: null, userId: action.id
         };
       } else {
         return {
           ...state, isAuthenticated: false, email: '', errorMessage: action.errorMessage
         }
       }
+    case 'LOGOUT_USER':
+      sessionStorage.clear();
+      return {
+        ...state, isAuthenticated: false, email: '', userId: ''
+      };
     default:
       return state
   }
