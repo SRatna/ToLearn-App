@@ -30,12 +30,7 @@ let Register = ({ onRegisterBtnClick }) => {
   )
 };
 
-const mapStateToProps = state => {
-  return {
-    user: state.user
-  }
-};
 const mapDispatchToProps = {
   onRegisterBtnClick: registerUser
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Register);
+export default connect(null, mapDispatchToProps)(Register);

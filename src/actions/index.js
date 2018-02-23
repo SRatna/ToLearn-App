@@ -10,8 +10,8 @@ export const loginUser = (email, password) => ({
   type: 'LOGIN_USER', email, password
 });
 
-export const loginUserDone = (authData) => ({
-  type: 'LOGIN_USER_DONE', ...authData
+export const loginOrRegisterUserDone = (authData) => ({
+  type: 'LOGIN_REGISTER_USER_DONE', ...authData
 });
 
 export const logoutUser = () => ({

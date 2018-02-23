@@ -9,16 +9,35 @@ export const initializeFirebase = () => {
 };
 
 export const registerUserApi = (email, password) => {
-  firebase.auth().createUserWithEmailAndPassword(email, password)
-    .catch(error => {
-      // Handle Errors here.
-      let errorCode = error.code;
-      let errorMessage = error.message;
-      if (errorCode === 'auth/weak-password') {
-        alert('The password is too weak.');
-      } else {
-        alert(errorMessage);
+  return firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then(user => {
+      return {
+        success: true,
+        id: user.uid,
+        email: user.email
       }
-      console.log(error);
+    }, error => {
+      let errorMessage = error.message;
+      return {
+        success: false,
+        errorMessage
+      }
+    });
+};
+
+export const loginUserApi = (email, password) => {
+  return firebase.auth().signInWithEmailAndPassword(email, password)
+    .then(user => {
+      return {
+        success: true,
+        id: user.uid,
+        email: user.email
+      }
+    }, error => {
+      let errorMessage = error.message;
+      return {
+        success: false,
+        errorMessage
+      }
     });
 };
