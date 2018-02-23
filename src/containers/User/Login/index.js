@@ -50,4 +50,5 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   onLoginBtnClick: loginUser
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
