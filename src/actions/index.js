@@ -18,6 +18,10 @@ export const logoutUser = () => ({
   type: 'LOGOUT_USER'
 });
 
+export const toggleLoading = () => ({
+  type: 'TOGGLE_LOADING'
+});
+
 export const saveToLearnText = (text) => ({
   type: 'SAVE_TO_LEARN_TEXT', text
 });

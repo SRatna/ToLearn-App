@@ -10,6 +10,7 @@ import Input from '../components/Input';
 import Button from '../components/Button';
 import ErrorBox from '../components/ErrorBox';
 import { Link } from 'react-router-dom';
+import LoadingSvg from '../components/LoadingSvg';
 
 class Register extends Component {
   constructor (props) {
@@ -31,17 +32,20 @@ class Register extends Component {
   };
 
   render () {
-    const { onRegisterBtnClick, errorMessage } = this.props;
+    const { onRegisterBtnClick, errorMessage, isLoading } = this.props;
     return (
       <Wrapper>
         <div>
           {errorMessage && <ErrorBox>{errorMessage}</ErrorBox>}
           <Card>
             <label>Email</label>
-            <Input type="email" onChange={this.handleEmailChange}/>
+            <Input type="email" onChange={this.handleEmailChange} value={this.state.email}/>
             <label>Password</label>
-            <Input type="password" onChange={this.handlePasswordChange}/>
-            <Button onClick={() => onRegisterBtnClick(this.state.email, this.state.password)}>Register</Button>
+            <Input type="password" onChange={this.handlePasswordChange} value={this.state.password}/>
+            <Button onClick={() => onRegisterBtnClick(this.state.email, this.state.password)}>
+              Register
+              {isLoading && <LoadingSvg/>}
+            </Button>
             <p style={{fontSize: '15px'}}>
               <Link to='/login'>Login Now</Link>{' '}
               if you already have an account.
@@ -55,7 +59,8 @@ class Register extends Component {
 
 const mapStateToProps = state => {
   return {
-    errorMessage: state.user.errorMessage
+    errorMessage: state.user.errorMessage,
+    isLoading: state.user.isLoading
   }
 };
 

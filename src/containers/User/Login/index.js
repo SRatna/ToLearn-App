@@ -32,7 +32,7 @@ class Login extends Component {
   };
 
   render () {
-    const { onLoginBtnClick, errorMessage, isAuthenticated } = this.props;
+    const { onLoginBtnClick, errorMessage, isAuthenticated, isLoading } = this.props;
     if (isAuthenticated) {
       return <Redirect to="/" />;
     }
@@ -42,12 +42,12 @@ class Login extends Component {
           {errorMessage && <ErrorBox>{errorMessage}</ErrorBox>}
           <Card>
             <label>Email</label>
-            <Input type="email" onChange={this.handleEmailChange}/>
+            <Input type="email" onChange={this.handleEmailChange} value={this.state.email}/>
             <label>Password</label>
-            <Input type="password" onChange={this.handlePasswordChange}/>
+            <Input type="password" onChange={this.handlePasswordChange} value={this.state.password}/>
             <Button onClick={() => onLoginBtnClick(this.state.email, this.state.password)}>
               Login
-              <LoadingSvg/>
+              {isLoading && <LoadingSvg/>}
             </Button>
             <p style={{fontSize: '15px'}}>
               <Link to='/register'>Register Now</Link>{' '}
@@ -64,7 +64,8 @@ class Login extends Component {
 const mapStateToProps = state => {
   return {
     isAuthenticated: state.user.isAuthenticated,
-    errorMessage: state.user.errorMessage
+    errorMessage: state.user.errorMessage,
+    isLoading: state.user.isLoading
   }
 };
 const mapDispatchToProps = {

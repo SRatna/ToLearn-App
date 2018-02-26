@@ -3,10 +3,10 @@
  */
 import styled from 'styled-components';
 const ErrorBox = styled.p`
-  border: 3px solid red;
-  padding: 10px;
-  max-width: 350px;
+  border: 2px dotted red;
+  padding: 17px;
+  max-width: 300px;
   color: brown;
-  margin: 10px 15px 50px;
+  margin-bottom: 30px;
 `;
 export default ErrorBox;

@@ -10,12 +10,7 @@ const Button = styled.button`
   width: 100%;
   padding: 10px;
   margin-top: 10px;
-  transition: 0.8s;
   outline: none;
   cursor: pointer;
-  &:hover {
-    background: palevioletred;
-    color: white;
-  }
 `;
 export default Button;
