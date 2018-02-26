@@ -48,6 +48,9 @@ export const logOutUserApi = () => {
 
 export const saveToLearnTextApi = (text) => {
   firebase.database().ref('toLearns/').push().set({
-    text: text
+    text: text,
+    userId: sessionStorage.getItem('userId'),
+    voteCount: 0,
+    createdAt: Date.now()
   });
 };
