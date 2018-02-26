@@ -27,8 +27,19 @@ class Home extends Component {
       <div>
         <NavBar/>
         <div>
-          <input type="text" onChange={this.handleToLearnTextChange} value={this.state.toLearnText}/>
-          <button onClick={() => this.props.onToLearnTextSaveBtnClick(this.state.toLearnText)}>Submit</button>
+          <input
+            type="text"
+            onChange={this.handleToLearnTextChange}
+            value={this.state.toLearnText}/>
+          <button
+            onClick={() => {
+              this.props.onToLearnTextSaveBtnClick(this.state.toLearnText);
+              this.setState({
+                toLearnText: ''
+              });
+            }}>
+            Submit
+          </button>
         </div>
       </div>
     );
