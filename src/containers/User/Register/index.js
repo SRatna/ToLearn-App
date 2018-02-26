@@ -35,7 +35,11 @@ class Register extends Component {
       password: e.target.value
     });
   };
-
+  handleFocusEvent = () => {
+    if (this.props.errorMessage) {
+      this.props.clearErrorMessage();
+    }
+  };
   render () {
     const { onRegisterBtnClick, errorMessage, isLoading } = this.props;
     return (
@@ -44,9 +48,9 @@ class Register extends Component {
           {errorMessage && <ErrorBox>{errorMessage}</ErrorBox>}
           <Card>
             <label>Email</label>
-            <Input type="email" onChange={this.handleEmailChange} value={this.state.email}/>
+            <Input type="email" onChange={this.handleEmailChange} value={this.state.email} onFocus={this.handleFocusEvent}/>
             <label>Password</label>
-            <Input type="password" onChange={this.handlePasswordChange} value={this.state.password}/>
+            <Input type="password" onChange={this.handlePasswordChange} value={this.state.password} onFocus={this.handleFocusEvent}/>
             <Button onClick={() => onRegisterBtnClick(this.state.email, this.state.password)}>
               Register
               {isLoading && <LoadingSvg/>}
