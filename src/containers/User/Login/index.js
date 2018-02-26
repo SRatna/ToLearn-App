@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loginUser } from '../../../actions';
+import { loginUser, clearErrorMessage } from '../../../actions';
 import Wrapper from '../components/Wrapper';
 import Card from '../components/Card';
 import Input from '../components/Input';
@@ -20,12 +20,23 @@ class Login extends Component {
       password: ''
     };
   }
+  componentDidMount() {
+    if (this.props.errorMessage) {
+      this.props.clearErrorMessage();
+    }
+  }
   handleEmailChange = (e) => {
+    if (this.props.errorMessage) {
+      this.props.clearErrorMessage();
+    }
     this.setState({
       email: e.target.value
     });
   };
   handlePasswordChange = (e) => {
+    if (this.props.errorMessage) {
+      this.props.clearErrorMessage();
+    }
     this.setState({
       password: e.target.value
     });
@@ -69,7 +80,8 @@ const mapStateToProps = state => {
   }
 };
 const mapDispatchToProps = {
-  onLoginBtnClick: loginUser
+  onLoginBtnClick: loginUser,
+  clearErrorMessage
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

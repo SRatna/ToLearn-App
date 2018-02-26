@@ -3,7 +3,6 @@
  */
 import styled from 'styled-components';
 const Card = styled.div`
-  transition: 0.3s;
   padding: 15px;
   max-width: 300px;
   margin-bottom: 100px;

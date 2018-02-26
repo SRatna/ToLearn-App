@@ -22,6 +22,10 @@ export const toggleLoading = () => ({
   type: 'TOGGLE_LOADING'
 });
 
+export const clearErrorMessage = () => ({
+  type: 'CLEAR_ERROR_MESSAGE'
+});
+
 export const saveToLearnText = (text) => ({
   type: 'SAVE_TO_LEARN_TEXT', text
 });

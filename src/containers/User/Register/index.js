@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { registerUser } from '../../../actions';
+import { registerUser, clearErrorMessage } from '../../../actions';
 import Wrapper from '../components/Wrapper';
 import Card from '../components/Card';
 import Input from '../components/Input';
@@ -19,6 +19,11 @@ class Register extends Component {
       email: '',
       password: ''
     };
+  }
+  componentDidMount() {
+    if (this.props.errorMessage) {
+      this.props.clearErrorMessage();
+    }
   }
   handleEmailChange = (e) => {
     this.setState({
@@ -65,7 +70,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  onRegisterBtnClick: registerUser
+  onRegisterBtnClick: registerUser,
+  clearErrorMessage
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

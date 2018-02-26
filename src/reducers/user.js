@@ -27,9 +27,13 @@ const user = (state = initialState, action) => {
       return {
         ...state, isAuthenticated: false, email: '', userId: ''
       };
-      case 'TOGGLE_LOADING':
+    case 'TOGGLE_LOADING':
       return {
         ...state, isLoading: !state.isLoading
+      };
+    case 'CLEAR_ERROR_MESSAGE':
+      return {
+        ...state, errorMessage: null
       };
     default:
       return state
