@@ -29,3 +29,7 @@ export const clearErrorMessage = () => ({
 export const saveToLearnText = (text) => ({
   type: 'SAVE_TO_LEARN_TEXT', text
 });
+
+export const getTopToLearns = () => ({
+  type: 'GET_TOP_TO_LEARNS'
+});

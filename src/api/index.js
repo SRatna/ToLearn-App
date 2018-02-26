@@ -54,3 +54,7 @@ export const saveToLearnTextApi = (text) => {
     createdAt: Date.now()
   });
 };
+
+export const getTopToLearnsApi = () => {
+  console.log('get');
+};

@@ -3,7 +3,7 @@
  */
 import { takeLatest, all } from 'redux-saga/effects';
 import { loginUser, registerUser, logOutUser } from './user';
-import { saveToLearnText } from './toLearn';
+import { saveToLearnText, getTopToLearns } from './toLearn';
 
 export default function* watcher() {
   yield all([
@@ -11,5 +11,6 @@ export default function* watcher() {
     takeLatest('REGISTER_USER', registerUser),
     takeLatest('LOGOUT_USER', logOutUser),
     takeLatest('SAVE_TO_LEARN_TEXT', saveToLearnText),
+    takeLatest('GET_TOP_TO_LEARNS', getTopToLearns),
   ]);
 }
