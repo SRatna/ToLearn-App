@@ -1,28 +1,41 @@
 /**
  * Created by sushanta on 2/22/18.
  */
-import React from 'react';
+import React, { Component } from 'react';
 import NavBar from '../NavBar';
 import { saveToLearnText } from '../../actions';
 import { connect } from 'react-redux';
+import { getTopToLearns } from '../../actions';
 
-let Home = ({ onToLearnTextSaveBtnClick }) => {
-  let toLearnText;
-  let handleToLearnTextChange = (e) => {
-    toLearnText = e.target.value;
+class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      toLearnText: ''
+    };
+  }
+  componentDidMount() {
+    this.props.getTopToLearns();
+  }
+  handleToLearnTextChange = (e) => {
+    this.setState({
+      toLearnText: e.target.value
+    })
   };
-  return (
-    <div>
-      <NavBar/>
+  render() {
+    return (
       <div>
-        <input type="text" onChange={handleToLearnTextChange}/>
-        <button onClick={() => onToLearnTextSaveBtnClick(toLearnText)}>Submit</button>
+        <NavBar/>
+        <div>
+          <input type="text" onChange={this.handleToLearnTextChange} value={this.state.toLearnText}/>
+          <button onClick={() => this.props.onToLearnTextSaveBtnClick(this.state.toLearnText)}>Submit</button>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 const mapDispatchToProps = {
-  onToLearnTextSaveBtnClick: saveToLearnText
+  onToLearnTextSaveBtnClick: saveToLearnText, getTopToLearns
 };
 export default connect(null, mapDispatchToProps)(Home);
