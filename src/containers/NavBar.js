@@ -13,7 +13,7 @@ const Nav = styled.nav`
 `;
 const Brand = styled.span`
   letter-spacing: 1px;
-  font-size: 20px;
+  font-size: 1.8em;
   border: 1px solid;
   padding: 2px;
   border-radius: 10px;
@@ -27,7 +27,7 @@ let NavBar = ({ onLogOutBtnClick }) => {
     <Nav>
       <Brand>To-Learn</Brand>
       <LogOut onClick={onLogOutBtnClick}>
-        <svg x="0px" y="0px" viewBox="0 0 490.3 490.3" height="25" width="40">
+        <svg x="0px" y="0px" viewBox="0 0 490.3 490.3" height="32" width="40">
           <path fill="white" d="M0,121.05v248.2c0,34.2,27.9,62.1,62.1,62.1h200.6c34.2,0,62.1-27.9,62.1-62.1v-40.2c0-6.8-5.5-12.3-12.3-12.3
 			s-12.3,5.5-12.3,12.3v40.2c0,20.7-16.9,37.6-37.6,37.6H62.1c-20.7,0-37.6-16.9-37.6-37.6v-248.2c0-20.7,16.9-37.6,37.6-37.6h200.6
 			c20.7,0,37.6,16.9,37.6,37.6v40.2c0,6.8,5.5,12.3,12.3,12.3s12.3-5.5,12.3-12.3v-40.2c0-34.2-27.9-62.1-62.1-62.1H62.1
