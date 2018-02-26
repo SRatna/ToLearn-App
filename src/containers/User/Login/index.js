@@ -10,6 +10,7 @@ import Input from '../components/Input';
 import Button from '../components/Button';
 import { Link, Redirect } from 'react-router-dom';
 import ErrorBox from '../components/ErrorBox';
+import LoadingSvg from '../components/LoadingSvg';
 
 class Login extends Component {
   constructor (props) {
@@ -44,11 +45,15 @@ class Login extends Component {
             <Input type="email" onChange={this.handleEmailChange}/>
             <label>Password</label>
             <Input type="password" onChange={this.handlePasswordChange}/>
-            <Button onClick={() => onLoginBtnClick(this.state.email, this.state.password)}>Login</Button>
+            <Button onClick={() => onLoginBtnClick(this.state.email, this.state.password)}>
+              Login
+              <LoadingSvg/>
+            </Button>
             <p style={{fontSize: '15px'}}>
               <Link to='/register'>Register Now</Link>{' '}
               if you don't have an account.
             </p>
+
           </Card>
         </div>
       </Wrapper>
