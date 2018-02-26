@@ -7,6 +7,6 @@ const ErrorBox = styled.p`
   padding: 10px;
   max-width: 350px;
   color: brown;
-  margin-bottom: 50px;
+  margin: 10px 15px 50px;
 `;
 export default ErrorBox;

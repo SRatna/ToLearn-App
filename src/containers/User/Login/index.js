@@ -1,7 +1,7 @@
 /**
  * Created by sushanta on 2/21/18.
  */
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loginUser } from '../../../actions';
 import Wrapper from '../components/Wrapper';
@@ -11,36 +11,51 @@ import Button from '../components/Button';
 import { Link, Redirect } from 'react-router-dom';
 import ErrorBox from '../components/ErrorBox';
 
-let Login = ({ onLoginBtnClick, errorMessage, isAuthenticated }) => {
-  if (isAuthenticated) {
-    return <Redirect to="/" />;
+class Login extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: ''
+    };
   }
-  let email, password;
-  let handleEmailChange = (e) => {
-    email = e.target.value;
+  handleEmailChange = (e) => {
+    this.setState({
+      email: e.target.value
+    });
   };
-  let handlePasswordChange = (e) => {
-    password = e.target.value;
+  handlePasswordChange = (e) => {
+    this.setState({
+      password: e.target.value
+    });
   };
-  return (
-    <Wrapper>
-      <div>
-        {errorMessage && <ErrorBox>{errorMessage}</ErrorBox>}
-        <Card>
-          <label>Email</label>
-          <Input type="email" onChange={handleEmailChange}/>
-          <label>Password</label>
-          <Input type="password" onChange={handlePasswordChange}/>
-          <Button onClick={() => onLoginBtnClick(email, password)}>Login</Button>
-          <p style={{fontSize: '15px'}}>
-            <Link to='/register'>Register Now</Link>{' '}
-            if you don't have an account.
-          </p>
-        </Card>
-      </div>
-    </Wrapper>
-  )
-};
+
+  render () {
+    const { onLoginBtnClick, errorMessage, isAuthenticated } = this.props;
+    if (isAuthenticated) {
+      return <Redirect to="/" />;
+    }
+    return (
+      <Wrapper>
+        <div>
+          {errorMessage && <ErrorBox>{errorMessage}</ErrorBox>}
+          <Card>
+            <label>Email</label>
+            <Input type="email" onChange={this.handleEmailChange}/>
+            <label>Password</label>
+            <Input type="password" onChange={this.handlePasswordChange}/>
+            <Button onClick={() => onLoginBtnClick(this.state.email, this.state.password)}>Login</Button>
+            <p style={{fontSize: '15px'}}>
+              <Link to='/register'>Register Now</Link>{' '}
+              if you don't have an account.
+            </p>
+          </Card>
+        </div>
+      </Wrapper>
+    )
+  }
+}
+
 const mapStateToProps = state => {
   return {
     isAuthenticated: state.user.isAuthenticated,

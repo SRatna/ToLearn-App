@@ -10,7 +10,7 @@ const Input = styled.input`
   border: 3px solid #db709359;
   transition: 0.5s;
   outline: none;
-  font-size: 20px;
+  font-size: 1em;
   &:focus {
     border: 3px solid #db7093;
   }
