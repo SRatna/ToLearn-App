@@ -14,7 +14,13 @@ export function* saveToLearnText({ text }) {
 
 export function* getTopToLearns() {
   try {
-    yield call(getTopToLearnsApi);
+    const topToLearnsSnapshot = yield call(getTopToLearnsApi);
+    topToLearnsSnapshot.once('value', toLearns => {
+      toLearns.forEach(toLearn => {
+        console.log(toLearn.key);
+        console.log(toLearn.val());
+      });
+    });
   } catch (err) {
     console.log(err);
   }

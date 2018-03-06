@@ -56,5 +56,5 @@ export const saveToLearnTextApi = (text) => {
 };
 
 export const getTopToLearnsApi = () => {
-  console.log('get');
+  return firebase.database().ref('toLearns').orderByChild('voteCount');
 };
