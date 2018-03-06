@@ -33,3 +33,7 @@ export const saveToLearnText = (text) => ({
 export const getTopToLearns = () => ({
   type: 'GET_TOP_TO_LEARNS'
 });
+
+export const addToLearns = (item) => ({
+  type: 'ADD_TO_LEARN', item
+});
