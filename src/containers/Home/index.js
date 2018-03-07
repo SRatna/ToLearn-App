@@ -3,9 +3,10 @@
  */
 import React, { Component } from 'react';
 import NavBar from '../NavBar';
-import { saveToLearnText } from '../../actions';
+import { saveToLearnText, addToLearn } from '../../actions';
 import { connect } from 'react-redux';
 import { getTopToLearns } from '../../actions';
+import { getToLearnsRefApi } from '../../api';
 
 class Home extends Component {
   constructor(props) {
@@ -15,8 +16,16 @@ class Home extends Component {
     };
   }
   componentDidMount() {
-    this.props.getTopToLearns();
+    let self = this;
+    // this.props.getTopToLearns();
+    const toLearnsRef = getToLearnsRefApi();
+    toLearnsRef.on('child_added', function (toLearn) {
+      let item = {...toLearn.val(), key: toLearn.key};
+      console.log(item);
+      self.props.addToLearn(item);
+    });
   }
+
   handleToLearnTextChange = (e) => {
     this.setState({
       toLearnText: e.target.value
@@ -41,12 +50,25 @@ class Home extends Component {
             Submit
           </button>
         </div>
+        <div>
+          {
+            this.props.toLearnItems.map(item => (
+              <div key={item.key}>
+                <span>{item.text}</span>
+              </div>
+            ))
+          }
+        </div>
       </div>
     );
   }
 }
-
-const mapDispatchToProps = {
-  onToLearnTextSaveBtnClick: saveToLearnText, getTopToLearns
+const mapStateToProps = state => {
+  return {
+    toLearnItems: state.toLearn.items
+  }
 };
-export default connect(null, mapDispatchToProps)(Home);
+const mapDispatchToProps = {
+  onToLearnTextSaveBtnClick: saveToLearnText, getTopToLearns, addToLearn
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
