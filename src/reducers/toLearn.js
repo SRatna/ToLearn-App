@@ -7,8 +7,10 @@ let initialState = {
 const toLearn = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_TO_LEARN':
+      console.log('here');
       return {...state, items: [...state.items, action.item]};
-      break;
+    case 'ADD_TO_LEARNS':
+      return {...state, items: action.items};
     default:
       return state
   }
