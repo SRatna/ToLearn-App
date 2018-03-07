@@ -50,11 +50,23 @@ export const saveToLearnTextApi = (text) => {
   firebase.database().ref('toLearns/').push().set({
     text: text,
     userId: sessionStorage.getItem('userId'),
+    email: sessionStorage.getItem('email'),
     voteCount: 0,
     createdAt: Date.now()
   });
 };
 
 export const getTopToLearnsApi = () => {
-  return firebase.database().ref('toLearns').orderByChild('voteCount');
+  return firebase.database().ref('toLearns').orderByChild('createdAt').once('value').then(toLearns => {
+    let toLearnItems = [];
+    toLearns.forEach(toLearn => {
+      let item = {...toLearn.val(), key: toLearn.key};
+      toLearnItems.push(item);
+    });
+    return toLearnItems;
+  });
+};
+
+export const getToLearnsRefApi = () => {
+  return firebase.database().ref('toLearns');
 };
