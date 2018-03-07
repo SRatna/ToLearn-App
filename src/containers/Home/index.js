@@ -5,7 +5,6 @@ import React, { Component } from 'react';
 import NavBar from '../NavBar';
 import { saveToLearnText, addToLearn } from '../../actions';
 import { connect } from 'react-redux';
-import { getTopToLearns } from '../../actions';
 import { getToLearnsRefApi } from '../../api';
 
 class Home extends Component {
@@ -17,11 +16,9 @@ class Home extends Component {
   }
   componentDidMount() {
     let self = this;
-    // this.props.getTopToLearns();
     const toLearnsRef = getToLearnsRefApi();
     toLearnsRef.on('child_added', function (toLearn) {
       let item = {...toLearn.val(), key: toLearn.key};
-      console.log(item);
       self.props.addToLearn(item);
     });
   }
@@ -69,6 +66,6 @@ const mapStateToProps = state => {
   }
 };
 const mapDispatchToProps = {
-  onToLearnTextSaveBtnClick: saveToLearnText, getTopToLearns, addToLearn
+  onToLearnTextSaveBtnClick: saveToLearnText, addToLearn
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
