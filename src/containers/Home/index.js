@@ -6,6 +6,9 @@ import NavBar from '../NavBar';
 import { saveToLearnText, addToLearn } from '../../actions';
 import { connect } from 'react-redux';
 import { getToLearnsRefApi } from '../../api';
+import Input from '../../components/Input';
+import Button from '../../components/Button';
+import AddToLearnBar from './components/AddToLearnBar';
 
 class Home extends Component {
   constructor(props) {
@@ -32,21 +35,21 @@ class Home extends Component {
     return (
       <div>
         <NavBar/>
-        <div>
-          <input
+        <AddToLearnBar>
+          <Input
             type="text"
             onChange={this.handleToLearnTextChange}
             value={this.state.toLearnText}/>
-          <button
+          <Button
             onClick={() => {
               this.props.onToLearnTextSaveBtnClick(this.state.toLearnText);
               this.setState({
                 toLearnText: ''
               });
             }}>
-            Submit
-          </button>
-        </div>
+            Add
+          </Button>
+        </AddToLearnBar>
         <div>
           {
             this.props.toLearnItems.map(item => (
