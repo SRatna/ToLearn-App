@@ -34,6 +34,10 @@ export const getTopToLearns = () => ({
   type: 'GET_TOP_TO_LEARNS'
 });
 
-export const addToLearns = (item) => ({
+export const addToLearn = (item) => ({
   type: 'ADD_TO_LEARN', item
+});
+
+export const addToLearns = (items) => ({
+  type: 'ADD_TO_LEARNS', items
 });
