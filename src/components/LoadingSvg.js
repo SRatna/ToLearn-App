@@ -3,11 +3,11 @@
  */
 import React from 'react';
 
-let LoadingSvg = () => (
+let LoadingSvg = ({ style }) => (
   <svg
     height="20px"
-    style={{float: 'right'}}
     viewBox="0 0 100 100"
+    style={style}
     preserveAspectRatio="xMidYMid">
     <circle
       cx="50" cy="50" fill="none"
