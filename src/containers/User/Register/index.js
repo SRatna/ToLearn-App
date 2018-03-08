@@ -10,7 +10,7 @@ import Input from '../../../components/Input';
 import Button from '../../../components/Button';
 import ErrorBox from '../components/ErrorBox';
 import { Link } from 'react-router-dom';
-import LoadingSvg from '../components/LoadingSvg';
+import LoadingSvg from '../../../components/LoadingSvg';
 
 class Register extends Component {
   constructor (props) {
