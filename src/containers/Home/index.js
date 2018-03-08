@@ -9,6 +9,11 @@ import { getToLearnsRefApi } from '../../api';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import AddToLearnBar from './components/AddToLearnBar';
+import ToLearnItem from './components/ToLearnItem';
+import PersonSvg from './components/PersonSvg';
+import BookSvg from './components/BookSvg';
+import ClockSvg from './components/ClockSvg';
+import moment from 'moment';
 
 class Home extends Component {
   constructor(props) {
@@ -42,6 +47,7 @@ class Home extends Component {
             value={this.state.toLearnText}/>
           <Button
             onClick={() => {
+              if (this.state.toLearnText === '') return;
               this.props.onToLearnTextSaveBtnClick(this.state.toLearnText);
               this.setState({
                 toLearnText: ''
@@ -53,9 +59,14 @@ class Home extends Component {
         <div>
           {
             this.props.toLearnItems.map(item => (
-              <div key={item.key}>
-                <span>{item.text}</span>
-              </div>
+              <ToLearnItem key={item.key}>
+                <BookSvg/>
+                <span>{item.text}</span><br/>
+                <PersonSvg/>
+                <span>{item.email.split('@')[0]}</span><br/>
+                <ClockSvg/>
+                <span>{moment(item.createdAt).fromNow()}</span>
+              </ToLearnItem>
             ))
           }
         </div>
