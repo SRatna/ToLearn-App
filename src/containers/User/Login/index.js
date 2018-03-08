@@ -10,7 +10,7 @@ import Input from '../../../components/Input';
 import Button from '../../../components/Button';
 import { Link, Redirect } from 'react-router-dom';
 import ErrorBox from '../components/ErrorBox';
-import LoadingSvg from '../components/LoadingSvg';
+import LoadingSvg from '../../../components/LoadingSvg';
 
 class Login extends Component {
   constructor (props) {
@@ -57,7 +57,7 @@ class Login extends Component {
             <Input type="password" onChange={this.handlePasswordChange} value={this.state.password} onFocus={this.handleFocusEvent}/>
             <Button onClick={() => onLoginBtnClick(this.state.email, this.state.password)}>
               Login
-              {isLoading && <LoadingSvg/>}
+              {isLoading && <LoadingSvg style={{float: 'right'}}/>}
             </Button>
             <p style={{fontSize: '15px'}}>
               <Link to='/register'>Register Now</Link>{' '}
