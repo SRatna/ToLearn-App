@@ -47,12 +47,20 @@ export const logOutUserApi = () => {
 };
 
 export const saveToLearnTextApi = (text) => {
+  let userId = sessionStorage.getItem('userId');
   firebase.database().ref('toLearns/').push().set({
     text: text,
-    userId: sessionStorage.getItem('userId'),
+    userId,
     email: sessionStorage.getItem('email'),
-    voteCount: 0,
     createdAt: Date.now()
+  });
+};
+
+export const voteToLearnApi = (key) => {
+  let userId = sessionStorage.getItem('userId');
+  firebase.database().ref(`toLearns/${key}/votes`).push().set({
+    voted: true,
+    userId
   });
 };
 
