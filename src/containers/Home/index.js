@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react';
 import NavBar from '../NavBar';
-import { saveToLearnText, addToLearn } from '../../actions';
+import { saveToLearnText, addToLearn, voteToLearn, updateToLearn } from '../../actions';
 import { connect } from 'react-redux';
 import { getToLearnsRefApi } from '../../api';
 import Input from '../../components/Input';
@@ -31,6 +31,10 @@ class Home extends Component {
       let item = {...toLearn.val(), key: toLearn.key};
       self.props.addToLearn(item);
     });
+    toLearnsRef.on('child_changed', function (toLearn) {
+      let item = {...toLearn.val(), key: toLearn.key};
+      self.props.updateToLearn(item);
+    });
   }
 
   handleToLearnTextChange = (e) => {
@@ -38,8 +42,12 @@ class Home extends Component {
       toLearnText: e.target.value
     })
   };
+
+  handleToLearnItemDoubleClick = (itemKey) => {
+    this.props.voteToLearn(itemKey);
+  };
+
   render() {
-    console.log(this.props.toLearnItems);
     return (
       <div>
         <NavBar/>
@@ -64,7 +72,9 @@ class Home extends Component {
         <div>
           {
             this.props.toLearnItems.map(item => (
-              <ToLearnItem key={item.key}>
+              <ToLearnItem
+                key={item.key}
+                onDoubleClick={() => this.handleToLearnItemDoubleClick(item.key)}>
                 <div>
                   <BookSvg/>
                   <span>{item.text}</span>
@@ -77,10 +87,27 @@ class Home extends Component {
                   <ClockSvg/>
                   <span>{moment(item.createdAt).fromNow()}</span>
                 </div>
-                <div>
-                  <VoteSvg/>
-                  <span>{item.voteCount} {item.voteCount > 1 ? ' votes' : ' vote'}</span>
-                </div>
+                {
+                  item.votes ?
+                    (
+                      <div>
+                        <VoteSvg
+                          voted={
+                            !!Object.values(item.votes).find(vote => vote.userId === this.props.currentUserId)
+                          }/>
+                        <span>
+                          {Object.values(item.votes).length}
+                          {Object.values(item.votes).length > 1 ? ' votes' : ' vote'}
+                        </span>
+                      </div>
+                    ) :
+                    (
+                      <div>
+                        <VoteSvg voted={false}/>
+                        <span>0 vote</span>
+                      </div>
+                    )
+                }
               </ToLearnItem>
             ))
           }
@@ -91,10 +118,11 @@ class Home extends Component {
 }
 const mapStateToProps = state => {
   return {
-    toLearnItems: state.toLearn.items
+    toLearnItems: state.toLearn.items,
+    currentUserId: state.user.userId
   }
 };
 const mapDispatchToProps = {
-  onToLearnTextSaveBtnClick: saveToLearnText, addToLearn
+  onToLearnTextSaveBtnClick: saveToLearnText, addToLearn, voteToLearn, updateToLearn
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
