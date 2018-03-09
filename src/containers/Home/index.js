@@ -9,11 +9,6 @@ import { getToLearnsRefApi } from '../../api';
 import LoadingSvg from '../../components/LoadingSvg';
 import AddToLearnBar from './components/AddToLearnBar';
 import ToLearnItem from './components/ToLearnItem';
-import PersonSvg from './components/PersonSvg';
-import BookSvg from './components/BookSvg';
-import ClockSvg from './components/ClockSvg';
-import VoteSvg from './components/VoteSvg';
-import moment from 'moment';
 
 class Home extends Component {
   componentDidMount() {
@@ -29,10 +24,6 @@ class Home extends Component {
     });
   }
 
-  handleToLearnItemDoubleClick = (itemKey) => {
-    this.props.voteToLearn(itemKey);
-  };
-
   render() {
     return (
       <div>
@@ -45,41 +36,9 @@ class Home extends Component {
             this.props.toLearnItems.map(item => (
               <ToLearnItem
                 key={item.key}
-                onDoubleClick={() => this.handleToLearnItemDoubleClick(item.key)}>
-                <div>
-                  <BookSvg/>
-                  <span>{item.text}</span>
-                </div>
-                <div>
-                  <PersonSvg/>
-                  <span>{item.email.split('@')[0]}</span>
-                </div>
-                <div>
-                  <ClockSvg/>
-                  <span>{moment(item.createdAt).fromNow()}</span>
-                </div>
-                {
-                  item.votes ?
-                    (
-                      <div>
-                        <VoteSvg
-                          voted={
-                            !!Object.values(item.votes).find(vote => vote.userId === this.props.currentUserId)
-                          }/>
-                        <span>
-                          {Object.values(item.votes).length}
-                          {Object.values(item.votes).length > 1 ? ' votes' : ' vote'}
-                        </span>
-                      </div>
-                    ) :
-                    (
-                      <div>
-                        <VoteSvg voted={false}/>
-                        <span>0 vote</span>
-                      </div>
-                    )
-                }
-              </ToLearnItem>
+                item={item}
+                voteToLearn={this.props.voteToLearn}
+                currentUserId={this.props.currentUserId}/>
             ))
           }
         </div>
