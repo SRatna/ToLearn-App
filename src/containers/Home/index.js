@@ -6,8 +6,6 @@ import NavBar from '../NavBar';
 import { saveToLearnText, addToLearn, voteToLearn, updateToLearn } from '../../actions';
 import { connect } from 'react-redux';
 import { getToLearnsRefApi } from '../../api';
-import Input from '../../components/Input';
-import Button from '../../components/Button';
 import LoadingSvg from '../../components/LoadingSvg';
 import AddToLearnBar from './components/AddToLearnBar';
 import ToLearnItem from './components/ToLearnItem';
@@ -18,12 +16,6 @@ import VoteSvg from './components/VoteSvg';
 import moment from 'moment';
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      toLearnText: ''
-    };
-  }
   componentDidMount() {
     let self = this;
     const toLearnsRef = getToLearnsRefApi();
@@ -37,12 +29,6 @@ class Home extends Component {
     });
   }
 
-  handleToLearnTextChange = (e) => {
-    this.setState({
-      toLearnText: e.target.value
-    })
-  };
-
   handleToLearnItemDoubleClick = (itemKey) => {
     this.props.voteToLearn(itemKey);
   };
@@ -51,22 +37,7 @@ class Home extends Component {
     return (
       <div>
         <NavBar/>
-        <AddToLearnBar>
-          <Input
-            type="text"
-            onChange={this.handleToLearnTextChange}
-            value={this.state.toLearnText}/>
-          <Button
-            onClick={() => {
-              if (this.state.toLearnText === '') return;
-              this.props.onToLearnTextSaveBtnClick(this.state.toLearnText);
-              this.setState({
-                toLearnText: ''
-              });
-            }}>
-            Add
-          </Button>
-        </AddToLearnBar>
+        <AddToLearnBar saveToLearnText={this.props.saveToLearnText}/>
         {this.props.toLearnItems.length === 0
         && <LoadingSvg style={{ display: 'block', margin: 'auto', height: '35px'}}/>}
         <div>
@@ -123,6 +94,6 @@ const mapStateToProps = state => {
   }
 };
 const mapDispatchToProps = {
-  onToLearnTextSaveBtnClick: saveToLearnText, addToLearn, voteToLearn, updateToLearn
+  saveToLearnText, addToLearn, voteToLearn, updateToLearn
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
