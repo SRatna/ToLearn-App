@@ -38,6 +38,14 @@ export const addToLearn = (item) => ({
   type: 'ADD_TO_LEARN', item
 });
 
+export const updateToLearn = (item) => ({
+  type: 'UPDATE_TO_LEARN', item
+});
+
+export const voteToLearn = (key) => ({
+  type: 'VOTE_TO_LEARN', key
+});
+
 export const addToLearns = (items) => ({
   type: 'ADD_TO_LEARNS', items
 });
