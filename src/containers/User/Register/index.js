@@ -9,7 +9,7 @@ import Card from '../components/Card';
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';
 import ErrorBox from '../components/ErrorBox';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import LoadingSvg from '../../../components/LoadingSvg';
 
 class Register extends Component {
@@ -41,7 +41,10 @@ class Register extends Component {
     }
   };
   render () {
-    const { onRegisterBtnClick, errorMessage, isLoading } = this.props;
+    const { onRegisterBtnClick, errorMessage, isLoading, isAuthenticated } = this.props;
+    if (isAuthenticated) {
+      return <Redirect to="/" />;
+    }
     return (
       <Wrapper>
         <div>
@@ -53,7 +56,7 @@ class Register extends Component {
             <Input type="password" onChange={this.handlePasswordChange} value={this.state.password} onFocus={this.handleFocusEvent}/>
             <Button onClick={() => onRegisterBtnClick(this.state.email, this.state.password)}>
               Register
-              {isLoading && <LoadingSvg/>}
+              {isLoading && <LoadingSvg style={{float: 'right'}}/>}
             </Button>
             <p style={{fontSize: '15px'}}>
               <Link to='/login'>Login Now</Link>{' '}
@@ -68,6 +71,7 @@ class Register extends Component {
 
 const mapStateToProps = state => {
   return {
+    isAuthenticated: state.user.isAuthenticated,
     errorMessage: state.user.errorMessage,
     isLoading: state.user.isLoading
   }
