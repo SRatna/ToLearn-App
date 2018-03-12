@@ -9,6 +9,7 @@ import Button from '../../../components/Button';
 const AddToLearnBar = styled.div`
   display: flex;
   padding: 10px;
+  margin-top: 60px;
   input {
     margin: 0 5px 0 0;
   }
