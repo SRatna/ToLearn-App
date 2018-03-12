@@ -42,8 +42,8 @@ export const updateToLearn = (item) => ({
   type: 'UPDATE_TO_LEARN', item
 });
 
-export const voteToLearn = (key) => ({
-  type: 'VOTE_TO_LEARN', key
+export const voteToLearn = (key, alreadyVoted) => ({
+  type: 'VOTE_TO_LEARN', key, alreadyVoted
 });
 
 export const addToLearns = (items) => ({
