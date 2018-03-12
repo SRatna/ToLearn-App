@@ -17,7 +17,6 @@ const ToLearnItem = styled.div`
     display: flex;
     span {
       flex: 1;
-      text-align: justify;
       margin: 0 0 7px 5px;
       font-size: 0.9em;
       text-transform: capitalize;
