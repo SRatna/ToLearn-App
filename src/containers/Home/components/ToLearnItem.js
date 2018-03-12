@@ -10,7 +10,7 @@ import VoteSvg from './VoteSvg';
 import moment from 'moment';
 
 const ToLearnItem = styled.div`
-  margin: 10px 10px 0;
+  margin: 0 10px 10px;
   padding: 10px;
   box-shadow: 1px 4px 8px 1px rgba(219, 112, 147, 0.32);
   div {
