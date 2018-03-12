@@ -30,9 +30,15 @@ const ToLearnItem = styled.div`
 class ToLearnItemComponent extends Component {
   render() {
     const { item, voteToLearn, currentUserId } = this.props;
+    let alreadyVoted = false;
+    let voteCount = 0;
+    if (item.votes) {
+      alreadyVoted = !!Object.values(item.votes).find(vote => vote.userId === currentUserId);
+      voteCount = Object.values(item.votes).length;
+    }
     return (
       <ToLearnItem
-        onDoubleClick={() => voteToLearn(item.key)}>
+        onDoubleClick={() => voteToLearn(item.key, alreadyVoted)}>
         <div>
           <BookSvg/>
           <span>{item.text}</span>
@@ -49,14 +55,10 @@ class ToLearnItemComponent extends Component {
           item.votes ?
             (
               <div>
-                <VoteSvg
-                  voted={
-                    !!Object.values(item.votes).find(vote => vote.userId === currentUserId)
-                  }/>
+                <VoteSvg voted={alreadyVoted}/>
                 <span>
-                          {Object.values(item.votes).length}
-                  {Object.values(item.votes).length > 1 ? ' votes' : ' vote'}
-                        </span>
+                  {voteCount}{voteCount > 1 ? ' votes' : ' vote'}
+                </span>
               </div>
             ) :
             (
