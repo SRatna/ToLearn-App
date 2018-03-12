@@ -56,12 +56,14 @@ export const saveToLearnTextApi = (text) => {
   });
 };
 
-export const voteToLearnApi = (key) => {
+export const voteToLearnApi = (key, alreadyVoted) => {
   let userId = sessionStorage.getItem('userId');
-  firebase.database().ref(`toLearns/${key}/votes`).push().set({
-    voted: true,
-    userId
-  });
+  if (!alreadyVoted) {
+    firebase.database().ref(`toLearns/${key}/votes`).push().set({
+      voted: true,
+      userId
+    });
+  }
 };
 
 export const getTopToLearnsApi = () => {
