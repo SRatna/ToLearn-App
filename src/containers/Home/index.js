@@ -9,6 +9,7 @@ import { getToLearnsRefApi } from '../../api';
 import LoadingSvg from '../../components/LoadingSvg';
 import AddToLearnBar from './components/AddToLearnBar';
 import ToLearnItem from './components/ToLearnItem';
+import ToLearnItemsContainer from './components/ToLearnItemsContainer';
 
 class Home extends Component {
   componentDidMount() {
@@ -30,18 +31,18 @@ class Home extends Component {
         <NavBar/>
         <AddToLearnBar saveToLearnText={this.props.saveToLearnText}/>
         {this.props.toLearnItems.length === 0
-        && <LoadingSvg style={{ display: 'block', margin: 'auto', height: '35px'}}/>}
-        <div>
-          {
-            this.props.toLearnItems.map(item => (
-              <ToLearnItem
-                key={item.key}
-                item={item}
-                voteToLearn={this.props.voteToLearn}
-                currentUserId={this.props.currentUserId}/>
-            ))
-          }
-        </div>
+        ? <LoadingSvg style={{ display: 'block', margin: '60px auto', height: '35px'}}/>
+        : <ToLearnItemsContainer>
+            {
+              this.props.toLearnItems.map(item => (
+                <ToLearnItem
+                  key={item.key}
+                  item={item}
+                  voteToLearn={this.props.voteToLearn}
+                  currentUserId={this.props.currentUserId}/>
+              ))
+            }
+          </ToLearnItemsContainer>}
       </div>
     );
   }
