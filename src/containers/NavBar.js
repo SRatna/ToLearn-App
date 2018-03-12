@@ -10,6 +10,10 @@ const Nav = styled.nav`
   background: #db7093;
   padding: 10px;
   color: white;
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
 `;
 const Brand = styled.span`
   letter-spacing: 1px;
