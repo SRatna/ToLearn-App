@@ -12,9 +12,9 @@ export function* saveToLearnText({ text }) {
   }
 }
 
-export function* voteToLearn({ key }) {
+export function* voteToLearn({ key, alreadyVoted }) {
   try {
-    yield call(voteToLearnApi, key);
+    yield call(voteToLearnApi, key, alreadyVoted);
   } catch (err) {
     console.log(err);
   }
