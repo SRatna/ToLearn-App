@@ -13,6 +13,8 @@ const toLearn = (state = initialState, action) => {
       return {...state, items};
     case 'ADD_TO_LEARNS':
       return {...state, items: action.items};
+    case 'LOGOUT_USER':
+      return initialState;
     default:
       return state
   }
