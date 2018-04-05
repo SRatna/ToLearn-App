@@ -1,1 +1,1 @@
-This project is a react based app that enables user to add new to-learn item.
+Simple react based app where user can add a new item they want to learn and others can vote on those items. That with largest vote count will be choosen for upcoming learning session.
